@@ -6,6 +6,9 @@ export default function Login() {
   const [password,setPassword]= useState('')
   const [role, setRole] = useState('student')
 
+
+
+
   const handleSubmit =() =>{
     axios.post('http://localhost:3001/auth/login', {username, password, role})
     .then(res => console.log(res))
@@ -32,7 +35,8 @@ export default function Login() {
           <label htmlFor='role'>Role:</label>
           <select id='role' name='role'  onChange={(e) => setRole(e.target.value)}>
             <option value='admin'>Admin</option>
-            <option value='user'>Student</option>
+            <option value='student'>Student</option>
+            
           </select>
         </div>
         <button className='btn-login'
