@@ -1,8 +1,9 @@
 
-
+import express from 'express';
 import bcrypt from 'bcrypt';
-import Admin from './models/Admin.js';
-import connectDB from './db.js';
+import {Admin} from './models/Admin.js';
+import  './db.js';
+import { connectDB } from './db.js';
 
 async function AdminAccount() {
   try {
@@ -10,7 +11,7 @@ async function AdminAccount() {
     if (adminCount === 0) {
       const hashPassword = await bcrypt.hash('1', 10);
       const newAdmin = new Admin({
-       username:'Admin',
+       username:'admin',
         password: hashPassword,
       });
       await newAdmin.save();

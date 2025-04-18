@@ -1,5 +1,5 @@
 import express from 'express';
-import Admin from '../models/Admin.js';
+import {Admin} from '../models/Admin.js';
 import jwt from 'jsonwebtoken';
 import bcrypt from 'bcrypt';
 
@@ -22,6 +22,10 @@ router.post('/login', async (req, res) => {
           
             return res.json({login:true,role: 'admin', token: token});
         }
+    else if(role === 'student'){
         }
-)
+        else{
+
+        }
+    })
 export {router as AdminRouter}

@@ -10,12 +10,15 @@ export default function Login() {
 
 
   const handleSubmit =() =>{
-    axios.post('http://localhost:3001/auth/login', {username, password, role})
+    console.log(role)
+    axios.post('http://localhost:3001/auth/login',{
+      username:username,
+      password:password,
+      role:role
+    }
+    )
     .then(res => console.log(res))
     .catch(err => console.log(err))
-
-
-    
   }
   return (
     <div className='login-page'>
