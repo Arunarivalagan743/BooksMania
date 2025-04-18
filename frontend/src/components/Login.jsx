@@ -4,14 +4,14 @@ import axios from 'axios'
 export default function Login() {
   const [username,setUsername]= useState('')
   const [password,setPassword]= useState('')
-  const [role, setRole] = useState('student')
+  const [role, setRole] = useState('admin')
 
 
 
 
   const handleSubmit =() =>{
     console.log(role)
-    axios.post('http://localhost:3001/auth/login',{
+    axios.post('http://localhost:5000/auth/login',{
       username:username,
       password:password,
       role:role
