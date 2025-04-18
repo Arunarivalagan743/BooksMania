@@ -7,8 +7,10 @@ const router = express.Router();
 
 router.post('/login', async (req, res) => {
     const {username, password, role} = req.body;
+    console.log(role)
+
     if(role === 'admin'){
-        
+            console.log(username)
             const admin = await Admin.findOne({  username });
             if(!admin){
               return res.json({message : "Admin not found"});
