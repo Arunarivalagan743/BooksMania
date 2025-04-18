@@ -1,31 +1,24 @@
 import React, { useState } from 'react'
 import '../css/Login.css'
-import { useNavigate } from 'react-router-dom'
 import axios from 'axios'
 export default function Login() {
-  const navigate = useNavigate();
   const [username,setUsername]= useState('')
   const [password,setPassword]= useState('')
   const [role, setRole] = useState('admin')
 
 
 
-axios.defaults.withCredentials = true; // Enable sending cookies with requests
+
   const handleSubmit =() =>{
     console.log(role)
-    axios.post('http://localhost:5000/auth/login', {
-      username: username,
-      password: password,
-      role: role
-    })
-    .then(res => {
-      if (res.data.login && res.data.role === 'admin') {
-      console.log(res.data.role);
-      localStorage.setItem('isLoggedIn', true); // Store login state in localStorage
-      navigate('/dashboard');
-      }
-    })
-    .catch(err => console.log(err));
+    axios.post('http://localhost:5000/auth/login',{
+      username:username,
+      password:password,
+      role:role
+    }
+    )
+    .then(res => console.log(res))
+    .catch(err => console.log(err))
   }
   return (
     <div className='login-page'>
