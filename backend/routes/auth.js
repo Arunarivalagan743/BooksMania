@@ -9,6 +9,9 @@ router.post('/login', async (req, res) => {
     const {username, password, role} = req.body;
     // console.log(role)
 
+    try{
+        const {username, password, role} = req.body;
+    
     if(role === 'admin'){
             // console.log(username)
             const admin = await Admin.findOne({  username });
@@ -24,10 +27,36 @@ router.post('/login', async (req, res) => {
           
             return res.json({login:true,role: 'admin', token: token});
         }
-    else if(role === 'student'){
+        else if(role === 'student'){
+           
         }
         else{
-
+           
         }
+    } catch (er) {
+        res.json(er);
+    }
+});
+const verifyAdmin = (req, res, next) => {
+    const token = req.cookies.token;
+    if(!token){
+        return res.json({message:"Invalid Admin"})
+    }
+    else{
+           jwt.verify(token, process.env.JWT_SECRET, (err, decoded) => {
+            if(err){
+                return res.json({message:"Invalid Admin"});
+            }else{
+                req.username = decoded.username;
+                req.role = decoded.role;
+                
+                next(); 
+            }
+               
+
     })
-export {router as AdminRouter}
+    }
+
+    }
+
+export {router as AdminRouter, verifyAdmin};

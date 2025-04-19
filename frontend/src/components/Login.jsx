@@ -12,7 +12,7 @@ export default function Login() {
 
 axios.defaults.withCredentials = true; // Enable sending cookies with requests
   const handleSubmit =() =>{
-    console.log(role)
+   
     axios.post('http://localhost:5000/auth/login', {
       username: username,
       password: password,
@@ -24,6 +24,7 @@ axios.defaults.withCredentials = true; // Enable sending cookies with requests
       localStorage.setItem('isLoggedIn', true); // Store login state in localStorage
       navigate('/dashboard');
       }
+      console.log(res);
     })
     .catch(err => console.log(err));
   }

@@ -12,6 +12,8 @@ import Home from "./components/Home";
 import Books from "./components/Books";
 import Login from "./components/Login";
 import Dashboard from "./components/Dashboard";
+import AddStudent from "./components/AddStudent";
+
 function App() {
   return (
     <BrowserRouter>
@@ -21,7 +23,8 @@ function App() {
         <Route path="/books" element={<Books />} />
         <Route path="/login" element={<Login />} />
         <Route path="/dashboard" element={<Dashboard />} />
-
+        <Route path="/addbook" element={<Books />} />
+        <Route path="/addstudent" element={<AddStudent />} />
 
       </Routes>
     </BrowserRouter>
