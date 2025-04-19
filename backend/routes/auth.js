@@ -1,5 +1,6 @@
 import express from 'express';
 import {Admin} from '../models/Admin.js';
+import {Student} from '../models/Student.js';
 import jwt from 'jsonwebtoken';
 import bcrypt from 'bcrypt';
 
@@ -28,7 +29,18 @@ router.post('/login', async (req, res) => {
             return res.json({login:true,role: 'admin', token: token});
         }
         else if(role === 'student'){
-           
+            const student = await Student.findOne({  username });
+            if(!student){
+              return res.json({message : "Student not found"});
+            }
+            const validPassword = await bcrypt.compare(password, student.password);
+            if(!validPassword){
+            return res.json({message : "Invalid Password"});
+            }
+            const token = jwt.sign({username: student.username, role: 'student'}, process.env.Student_JWT_SECRET, {expiresIn: '1h'});
+            res.cookie('token', token, { httpOnly: true, secure: true });
+          
+            return res.json({login:true,role: 'student', token: token});
         }
         else{
            
