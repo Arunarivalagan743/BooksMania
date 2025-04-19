@@ -7,6 +7,7 @@ import Books from "./components/Books";
 import Login from "./components/Login";
 import Dashboard from "./components/Dashboard";
 import AddStudent from "./components/AddStudent";
+import AddBook from "./components/AddBook";
 import Logout from "./components/Logout";
 import axios from "axios";
 
@@ -39,8 +40,9 @@ function App() {
         <Route path="/login" element={<Login setRoleVar={setRole} />}></Route>
 
         <Route path="/dashboard" element={<Dashboard />} />
-        <Route path="/addbook" element={<Books />} />
+        <Route path="/books" element={<Books />} />
         <Route path="/addstudent" element={<AddStudent />} />
+        <Route path="/addbook" element={<AddBook/>} />
         <Route path="/logout" element={<Logout setRole={setRole} />} />
       </Routes>
     </BrowserRouter>

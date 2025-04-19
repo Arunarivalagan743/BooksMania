@@ -5,7 +5,7 @@ import cors from "cors";
 import cookieParser from "cookie-parser";
 import { AdminRouter } from "./routes/auth.js";
 import { StudentRouter } from "./routes/student.js";
-
+import { BookRouter } from "./routes/book.js";
 const app = express();
 app.use(
   cors({
@@ -24,6 +24,7 @@ app.get("/", (req, res) => {
 app.use("/auth", AdminRouter);
 
 app.use("/student", StudentRouter);
+app.use("/book", BookRouter);
 
 app.listen(process.env.PORT, () => {
   console.log(`Server is running on port ${process.env.PORT}`);
