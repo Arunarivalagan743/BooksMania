@@ -11,21 +11,24 @@ export default function Student() {
   const navigate = useNavigate();
   const handleSubmit = (e) => {
     e.preventDefault();
-    axios.post("http://localhost:5000/student/register", {roll, username, grade, password})
+    axios
+      .post("http://localhost:5000/student/register", {
+        roll,
+        username,
+        grade,
+        password,
+      })
       .then((res) => {
-        if(res.data.registered) {
-
+        if (res.data.registered) {
           navigate("/dashboard");
         }
-      console.log(res)
+        console.log(res);
       })
       .catch((err) => {
-        console.log(err)
-      })
-  }
+        console.log(err);
+      });
+  };
 
-
-    
   return (
     <div className="student-form-container">
       <form className="student-form" onSubmit={handleSubmit}>

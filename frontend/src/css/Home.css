@@ -3,7 +3,7 @@
     justify-content: center;
     align-items: center;
     height: 100vh;
-    background-color: #7ae7ed;
+    background-color: #d9edee;
     
     background-size: cover;
     background-position: center;
@@ -13,7 +13,7 @@
 
 .hero-content {
     max-width: 600px;
-    background: rgba(255, 255, 255, 0.8);
+    background: rgba(249, 219, 208, 0.8);
     padding: 20px;
     border-radius: 10px;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
@@ -31,6 +31,8 @@
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     animation: backgroundAnimation 3s infinite alternate;
+    text-align: center;
+    text-wrap:inherit;
 }
 
 @keyframes backgroundAnimation {

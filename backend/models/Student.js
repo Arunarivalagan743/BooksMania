@@ -1,12 +1,11 @@
-
-import mongoose from 'mongoose';
+import mongoose from "mongoose";
 
 const studentSchema = new mongoose.Schema({
-    roll :{
-        type: String,
-        required: true,
-        unique: true,
-    },
+  roll: {
+    type: String,
+    required: true,
+    unique: true,
+  },
   username: {
     type: String,
     required: true,
@@ -16,12 +15,12 @@ const studentSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
-  grade :{
+  grade: {
     type: String,
     required: true,
-  }
+  },
 });
 
-const Student = mongoose.model('Student', studentSchema);
+const Student = mongoose.model("Student", studentSchema);
 
-export {Student};
+export { Student };
