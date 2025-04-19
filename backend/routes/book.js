@@ -1,29 +1,33 @@
-import express from 'express';
-import {Book} from '../models/Book.js';
-import { verifyAdmin } from './auth.js';
-
+import express from "express";
+import { Book } from "../models/Book.js";
+import { verifyAdmin } from "./auth.js";
 
 const router = express.Router();
-router.post('/add', verifyAdmin, async (req, res) => {
-    try {
-        const {name, author, imageUrl} = req.body;
-    
+router.post("/add", verifyAdmin, async (req, res) => {
+  try {
+    const { name, author, imageUrl } = req.body;
 
-        const newbook = new Book({
-            name,
-            author,
-            imageUrl,
-    
-        });
-        await newbook.save();
-        return res.json({message: "Book added successfully", added: true});
-    }
-    catch(err)
-    {
-        console.error(err);
-        return res.status(500).json({message: "Error in adding the  Book"});
-    }
+    const newbook = new Book({
+      name,
+      author,
+      imageUrl,
+    });
+    await newbook.save();
+    return res.json({ message: "Book added successfully", added: true });
+  } catch (err) {
+    console.error(err);
+    return res.status(500).json({ message: "Error in adding the  Book" });
+  }
 });
 
 
-export {router as BookRouter};
+router.get("/books", async (req, res) => {
+  try {
+    const books = await Book.find();
+    return res.json({ books });
+  } catch (err) {
+    console.error(err);
+    return res.status(500).json({ message: "Error in getting the Books" });
+  }
+});
+export { router as BookRouter };
