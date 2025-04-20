@@ -14,7 +14,7 @@ function BookCard({book}) {
         </div>
         <div className='book-actions'>
         <button className='book-button'><Link to={`/update/${book._id}`} className="btn-link">Edit</Link></button>
-        <button className='book-button'>Delete</button> 
+        <button className='book-button'><Link to={`/delete/${book._id}`} className="btn-link">Delete</Link></button>
         </div>
     </div>
   )

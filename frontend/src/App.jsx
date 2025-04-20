@@ -9,6 +9,7 @@ import Dashboard from "./components/Dashboard";
 import AddStudent from "./components/AddStudent";
 import AddBook from "./components/AddBook";
 import EditBook from "./components/EditBook";
+import DeleteBook from "./components/DeleteBook";
 import Logout from "./components/Logout";
 import axios from "axios";
 
@@ -45,6 +46,7 @@ function App() {
         <Route path="/addstudent" element={<AddStudent />} />
         <Route path="/addbook" element={<AddBook/>} />
         <Route path="/update/:id" element={<EditBook />} />
+        <Route path="/delete/:id" element={<DeleteBook />} />
 
         <Route path="/logout" element={<Logout setRole={setRole} />} />
       </Routes>
