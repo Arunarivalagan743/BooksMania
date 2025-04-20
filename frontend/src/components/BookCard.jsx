@@ -2,7 +2,7 @@ import React from 'react'
 import "../css/BookCard.css";
 import { useState } from 'react'
 import { Link } from 'react-router-dom';
-function BookCard({book}) {
+function BookCard({book,role}) {
     const {name, author, imageUrl} = book;
     console.log(book);
   return (
@@ -12,10 +12,12 @@ function BookCard({book}) {
             <h2>{name}</h2>
             <p>{author}</p>
         </div>
-        <div className='book-actions'>
-        <button className='book-button'><Link to={`/update/${book._id}`} className="btn-link">Edit</Link></button>
-        <button className='book-button'><Link to={`/delete/${book._id}`} className="btn-link">Delete</Link></button>
-        </div>
+        {role === "admin" &&
+          <div className='book-actions'>
+          <button className='book-button'><Link to={`/update/${book._id}`} className="btn-link">Edit</Link></button>
+          <button className='book-button'><Link to={`/delete/${book._id}`} className="btn-link">Delete</Link></button>
+          </div> }
+      
     </div>
   )
 }
