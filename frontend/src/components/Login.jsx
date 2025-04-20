@@ -1,7 +1,12 @@
-import React, { useState } from "react";
+
+
+import React, { useState, useEffect } from "react";
 import "../css/Login.css";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
+import AOS from "aos";
+import "aos/dist/aos.css"; // AOS styles
+import Swal from "sweetalert2"; // SweetAlert2
 
 export default function Login({ setRoleVar }) {
   const navigate = useNavigate();
@@ -10,6 +15,12 @@ export default function Login({ setRoleVar }) {
   const [role, setRole] = useState("admin");
 
   axios.defaults.withCredentials = true; 
+
+  // Initialize AOS
+  useEffect(() => {
+    AOS.init({ duration: 1000 });
+  }, []);
+
   const handleSubmit = () => {
     axios
       .post("http://localhost:5000/auth/login", {
@@ -19,7 +30,7 @@ export default function Login({ setRoleVar }) {
       })
       .then((res) => {
         if (res.data.login && res.data.role === "admin") {
-          setRoleVar("admin"); 
+          setRoleVar("admin");
           localStorage.setItem("isLoggedIn", true); // Store login state in localStorage
           navigate("/dashboard");
         } else if (res.data.login && res.data.role === "student") {
@@ -27,16 +38,29 @@ export default function Login({ setRoleVar }) {
           localStorage.setItem("isLoggedIn", true); 
           navigate("/");
         }
-
-        console.log(res);
+        // Show success alert with SweetAlert
+        Swal.fire({
+          icon: 'success',
+          title: 'Login Successful',
+          text: `Welcome back, ${username}!`,
+        });
       })
-      .catch((err) => console.log(err));
+      .catch((err) => {
+        // Show error alert if login fails
+        Swal.fire({
+          icon: 'error',
+          title: 'Login Failed',
+          text: 'Invalid username or password. Please try again.',
+        });
+        console.log(err);
+      });
   };
+
   return (
-    <div className="login-page">
-      <div className="login-container">
+    <div className="login-page" data-aos="fade-up">
+      <div className="login-container" data-aos="fade-right">
         <h1>Login</h1> <br />
-        <div className="form-group">
+        <div className="form-group" data-aos="fade-left">
           <label htmlFor="username">Username</label>
           <input
             type="text"
@@ -46,7 +70,7 @@ export default function Login({ setRoleVar }) {
             onChange={(e) => setUsername(e.target.value)}
           />
         </div>
-        <div className="form-group">
+        <div className="form-group" data-aos="fade-left">
           <label htmlFor="password">Password</label>
           <input
             type="password"
@@ -56,7 +80,7 @@ export default function Login({ setRoleVar }) {
             onChange={(e) => setPassword(e.target.value)}
           />
         </div>
-        <div className="form-group">
+        <div className="form-group" data-aos="fade-left">
           <label htmlFor="role">Role:</label>
           <select
             id="role"
@@ -67,7 +91,7 @@ export default function Login({ setRoleVar }) {
             <option value="student">Student</option>
           </select>
         </div>
-        <button className="btn-login" onClick={handleSubmit}>
+        <button className="btn-login" onClick={handleSubmit} data-aos="zoom-in">
           Login
         </button>
       </div>
