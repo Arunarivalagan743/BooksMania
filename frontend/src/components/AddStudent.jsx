@@ -1,11 +1,10 @@
-
 import React, { useState, useEffect } from "react";
 import "../css/AddStudent.css";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
-import AOS from "aos"; // Import AOS
-import "aos/dist/aos.css"; // AOS Styles
-import Swal from "sweetalert2"; // Import SweetAlert2
+import AOS from "aos";
+import "aos/dist/aos.css";
+import Swal from "sweetalert2";
 
 export default function Student() {
   const [roll, setRoll] = useState("");
@@ -14,15 +13,13 @@ export default function Student() {
   const [password, setPassword] = useState("");
   const navigate = useNavigate();
 
-  // Initialize AOS for animations
   useEffect(() => {
-    AOS.init({ duration: 1000 }); // Set animation duration for AOS
+    AOS.init({ duration: 1000 });
   }, []);
 
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    // Send student data to the backend
     axios
       .post("http://localhost:5000/student/register", {
         roll,
@@ -32,17 +29,15 @@ export default function Student() {
       })
       .then((res) => {
         if (res.data.registered) {
-          // Show success message with SweetAlert2
           Swal.fire({
             icon: "success",
             title: "Student Registered",
             text: "The student has been successfully registered!",
           }).then(() => {
-            navigate("/dashboard"); // Redirect to dashboard after successful registration
+            navigate("/dashboard");
           });
         } else {
           console.log(res);
-          // Show error message if registration fails
           Swal.fire({
             icon: "error",
             title: "Registration Failed",
@@ -52,7 +47,6 @@ export default function Student() {
       })
       .catch((err) => {
         console.log(err);
-        // Show error alert if request fails
         Swal.fire({
           icon: "error",
           title: "Something went wrong",

@@ -1,13 +1,10 @@
-
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import "../css/Navbar.css";
-import { FaBars, FaBook, FaUser, FaCog, FaPlus } from 'react-icons/fa';  // Import React Icons
+import { FaBars, FaBook, FaUser, FaCog, FaPlus } from 'react-icons/fa';
 import AOS from 'aos';
-import 'aos/dist/aos.css'; // Import AOS styles
-
-// Import the logo image
-import booksLogo from "../assets/books.png";  // Adjust the path as necessary
+import 'aos/dist/aos.css';
+import booksLogo from "../assets/books.png";
 
 function Navbar({ role }) {
   const [menuActive, setMenuActive] = useState(false);
@@ -15,11 +12,17 @@ function Navbar({ role }) {
   const toggleMenu = () => {
     setMenuActive(!menuActive);
   };
+  const [bookCount, setBookCount] = useState(0);
 
   useEffect(() => {
-    // Initialize AOS with a duration for the animations
+    const purchased = JSON.parse(localStorage.getItem("purchasedBooks")) || [];
+    setBookCount(purchased.length);
+    AOS.init({ duration: 1000 });
+  }, []);
+  
+  useEffect(() => {
     AOS.init({
-      duration: 1000, // Animation duration in milliseconds
+      duration: 1000,
     });
   }, []);
 
@@ -27,7 +30,6 @@ function Navbar({ role }) {
     <nav className="navbar" data-aos="fade-down">
       <div className="navbar-left" data-aos="fade-right">
         <Link to="/" className="navbar-brand">
-          {/* Use the imported logo image */}
           <img src={booksLogo} alt="Book Mania Logo" className="navbar-logo" />
           Book Mania
         </Link>
@@ -58,6 +60,7 @@ function Navbar({ role }) {
             <FaUser /> Logout
           </Link>
         )}
+        
       </div>
       <div className="navbar-toggle" onClick={toggleMenu} data-aos="fade-up">
         <FaBars />

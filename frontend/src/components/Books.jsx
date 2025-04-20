@@ -1,3 +1,4 @@
+// Books.jsx
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import AOS from 'aos';
@@ -7,27 +8,46 @@ import "../css/Books.css";
 
 export default function Books({ role }) {
   const [books, setBooks] = useState([]);
+  const [searchTerm, setSearchTerm] = useState("");
 
   useEffect(() => {
-    AOS.init({ duration: 1000 }); // Initialize AOS for animations
+    AOS.init({ duration: 1000 });
     axios.get("http://localhost:5000/book/books")
       .then(res => {
         setBooks(res.data.books);
       })
       .catch(err => {
-        console.log(err);
+        console.error("Failed to fetch books:", err);
       });
   }, []);
 
+  const filteredBooks = books.filter(book =>
+    book.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
+    book.author.toLowerCase().includes(searchTerm.toLowerCase())
+  );
+
   return (
-    <div className="books-container">
-      {books.length > 0 ? (
-        books.map((book) => (
-          <BookCard key={book._id} book={book} role={role} />
-        ))
-      ) : (
-        <p>No books found.</p>
-      )}
+    <div className="books-wrapper">
+      {/* 🔍 Animated Search Input */}
+      <div className="search-bar" data-aos="fade-down">
+        <input
+          type="text"
+          placeholder="🔍 Search by book name or author..."
+          value={searchTerm}
+          onChange={(e) => setSearchTerm(e.target.value)}
+          className="search-input"
+        />
+      </div>
+
+      <div className="books-container">
+        {filteredBooks.length > 0 ? (
+          filteredBooks.map((book) => (
+            <BookCard key={book._id} book={book} role={role} />
+          ))
+        ) : (
+          <p className="no-books" data-aos="fade-up">📚 No books found.</p>
+        )}
+      </div>
     </div>
   );
 }

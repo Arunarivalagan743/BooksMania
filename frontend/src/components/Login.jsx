@@ -16,7 +16,7 @@ export default function Login({ setRoleVar }) {
 
   axios.defaults.withCredentials = true; 
 
-  // Initialize AOS
+
   useEffect(() => {
     AOS.init({ duration: 1000 });
   }, []);
@@ -38,7 +38,7 @@ export default function Login({ setRoleVar }) {
           localStorage.setItem("isLoggedIn", true); 
           navigate("/");
         }
-        // Show success alert with SweetAlert
+       
         Swal.fire({
           icon: 'success',
           title: 'Login Successful',
@@ -46,7 +46,6 @@ export default function Login({ setRoleVar }) {
         });
       })
       .catch((err) => {
-        // Show error alert if login fails
         Swal.fire({
           icon: 'error',
           title: 'Login Failed',

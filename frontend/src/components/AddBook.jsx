@@ -1,28 +1,26 @@
-
 import React, { useState, useEffect } from "react";
 import "../css/AddBook.css";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import AOS from "aos";
-import "aos/dist/aos.css"; // AOS Styles
+import "aos/dist/aos.css";
 import Swal from "sweetalert2";
-import { ClipLoader } from "react-spinners"; // Import the spinner
+import { ClipLoader } from "react-spinners";
 
 export default function AddBook() {
   const [name, setName] = useState("");
   const [author, setAuthor] = useState("");
   const [imageUrl, setImageUrl] = useState("");
-  const [loading, setLoading] = useState(false); // State for showing the spinner
+  const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
 
-  // Initialize AOS on component mount
   useEffect(() => {
-    AOS.init({ duration: 1000 }); // Set animation duration for AOS
+    AOS.init({ duration: 1000 });
   }, []);
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    setLoading(true); // Set loading to true when form is being submitted
+    setLoading(true);
 
     axios
       .post("http://localhost:5000/book/add", {
@@ -31,20 +29,18 @@ export default function AddBook() {
         imageUrl,
       })
       .then((res) => {
-        setLoading(false); // Stop the loading spinner after the request
+        setLoading(false);
 
         if (res.data.added) {
-          // Show success alert
           Swal.fire({
             icon: "success",
             title: "Book Added Successfully",
             text: "The book has been added to the collection!",
           }).then(() => {
-            navigate("/books"); // Redirect to books list after success
+            navigate("/books");
           });
         } else {
           console.log(res);
-          // Show error alert if not added
           Swal.fire({
             icon: "error",
             title: "Failed to Add Book",
@@ -53,9 +49,8 @@ export default function AddBook() {
         }
       })
       .catch((err) => {
-        setLoading(false); // Stop the loading spinner in case of error
+        setLoading(false);
         console.log(err);
-        // Show error alert in case of failure
         Swal.fire({
           icon: "error",
           title: "Something went wrong",

@@ -1,11 +1,10 @@
-
 import React, { useState, useEffect } from "react";
 import "../css/AddBook.css";
 import axios from "axios";
 import { useNavigate, useParams } from "react-router-dom";
-import Swal from 'sweetalert2';  // Import SweetAlert2
-import AOS from 'aos';  // Import AOS
-import 'aos/dist/aos.css';  // Import AOS CSS
+import Swal from 'sweetalert2';
+import AOS from 'aos';
+import 'aos/dist/aos.css';
 
 export default function EditBook() {
   const [name, setName] = useState("");
@@ -15,9 +14,7 @@ export default function EditBook() {
   const navigate = useNavigate();
   const { id } = useParams(); 
 
-  // Fetch the book data to edit
   useEffect(() => {
-    // Initialize AOS for animations
     AOS.init({ duration: 1000 });
 
     axios
@@ -32,7 +29,6 @@ export default function EditBook() {
       });
   }, [id]);
 
-  // Handle form submission
   const handleSubmit = (e) => {
     e.preventDefault();
 
@@ -44,13 +40,12 @@ export default function EditBook() {
       })
       .then((res) => {
         if (res.data.updated) {
-          // Show success alert
           Swal.fire(
             'Success!',
             'Book has been updated.',
             'success'
           ).then(() => {
-            navigate("/books"); // Redirect to books page after success
+            navigate("/books");
           });
         } else {
           console.log(res);
@@ -58,7 +53,6 @@ export default function EditBook() {
       })
       .catch((err) => {
         console.log(err);
-        // Show error alert
         Swal.fire(
           'Error!',
           'Something went wrong, please try again.',
