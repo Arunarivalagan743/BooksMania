@@ -35,7 +35,7 @@ export default function AddBook() {
         if (res.data.added) {
           Swal.fire({
             icon: "success",
-            title: "Book Added Successfully",
+            title: "Book is Added Successfully",
             text: "The book has been added to the collection!",
           }).then(() => {
             navigate("/books");
