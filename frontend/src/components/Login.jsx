@@ -1,5 +1,3 @@
-
-
 import React, { useState, useEffect } from "react";
 import "../css/Login.css";
 import { useNavigate } from "react-router-dom";
@@ -14,8 +12,7 @@ export default function Login({ setRoleVar }) {
   const [password, setPassword] = useState("");
   const [role, setRole] = useState("admin");
 
-  axios.defaults.withCredentials = true; 
-
+  axios.defaults.withCredentials = true;
 
   useEffect(() => {
     AOS.init({ duration: 1000 });
@@ -28,24 +25,36 @@ export default function Login({ setRoleVar }) {
         password: password,
         role: role,
       }, {
-      withCredentials: true,
-    })
+        withCredentials: true,
+      })
       .then((res) => {
         if (res.data.login && res.data.role === "admin") {
           setRoleVar("admin");
           localStorage.setItem("isLoggedIn", true); // Store login state in localStorage
+          // SweetAlert for success
+          Swal.fire({
+            icon: 'success',
+            title: 'Login Successful',
+            text: 'Welcome Admin!',
+          });
           navigate("/dashboard");
         } else if (res.data.login && res.data.role === "student") {
           setRoleVar("student");
-          localStorage.setItem("isLoggedIn", true); 
+          localStorage.setItem("isLoggedIn", true);
+          // SweetAlert for success
+          Swal.fire({
+            icon: 'success',
+            title: 'Login Successful',
+            text: 'Welcome Student!',
+          });
           navigate("/");
+        } else {
+          Swal.fire({
+            icon: 'error',
+            title: 'Login Failed',
+            text: res.data.message || 'Something went wrong. Please try again.',
+          });
         }
-       
-        Swal.fire({
-          icon: 'success',
-          title: 'Login Successful',
-          text: `Welcome back, ${username}!`,
-        });
       })
       .catch((err) => {
         Swal.fire({
