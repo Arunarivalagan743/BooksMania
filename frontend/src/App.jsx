@@ -22,7 +22,7 @@ function App() {
   axios.defaults.withCredentials = true; 
   useEffect(() => {
     axios
-      .get("http://localhost:5000/auth/verify")
+      .get("https://booksmania-6.onrender.com/auth/verify")
       .then((res) => {
         if (res.data.login) {
           setRole(res.data.role);

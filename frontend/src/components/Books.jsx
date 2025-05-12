@@ -12,7 +12,7 @@ export default function Books({ role }) {
 
   useEffect(() => {
     AOS.init({ duration: 1000 });
-    axios.get("http://localhost:5000/book/books")
+    axios.get("https://booksmania-6.onrender.com/book/books")
       .then(res => {
         setBooks(res.data.books);
       })

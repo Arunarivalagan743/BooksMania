@@ -23,7 +23,7 @@ function DeleteBook() {
       }).then((result) => {
         if (result.isConfirmed) {
           axios
-            .delete(`http://localhost:5000/book/book/${id}`)
+            .delete(`https://booksmania-6.onrender.com/book/book/${id}`)
             .then((res) => {
               if (res.data.deleted) {
                 Swal.fire(

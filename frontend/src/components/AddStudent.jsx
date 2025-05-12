@@ -21,7 +21,7 @@ export default function Student() {
     e.preventDefault();
 
     axios
-      .post("http://localhost:5000/student/register", {
+      .post("https://booksmania-6.onrender.com/student/register", {
         roll,
         username,
         grade,

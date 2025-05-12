@@ -23,7 +23,7 @@ export default function AddBook() {
     setLoading(true);
 
     axios
-      .post("http://localhost:5000/book/add", {
+      .post("https://booksmania-6.onrender.com/book/add", {
         name,
         author,
         imageUrl,
