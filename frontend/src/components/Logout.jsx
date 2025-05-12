@@ -12,7 +12,7 @@ function Logout({ setRole }) {
     AOS.init({ duration: 1000 });
 
     axios
-      .get("https://booksmania-6.onrender.com/auth/logout")
+      .get("https://booksmania-7.onrender.com/auth/logout")
       .then((res) => {
         if (res.data.logout) {
           Swal.fire({

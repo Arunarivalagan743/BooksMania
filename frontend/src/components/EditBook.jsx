@@ -19,7 +19,7 @@ export default function EditBook() {
 
     axios
       .get(`
-https://booksmania-6.onrender.com/book/book/${id}`)
+https://booksmania-7.onrender.com/book/book/${id}`)
       .then((res) => {
         setName(res.data.name);
         setAuthor(res.data.author);
@@ -34,7 +34,7 @@ https://booksmania-6.onrender.com/book/book/${id}`)
     e.preventDefault();
 
     axios
-      .put(`https://booksmania-6.onrender.com/book/book/${id}`, {
+      .put(`https://booksmania-7.onrender.com/book/book/${id}`, {
         name,
         author,
         imageUrl,

@@ -7,7 +7,7 @@ function Dashboard() {
     const [books, setBooks] = useState(0);
     const [admins, setAdmins] = useState(0);
     useEffect(() => {
-        axios.get('https://booksmania-6.onrender.com/dashboard')
+        axios.get('https://booksmania-7.onrender.com/dashboard')
             .then(res => {
                 if (res.data.ok) {
                     setStudents(res.data.students);
