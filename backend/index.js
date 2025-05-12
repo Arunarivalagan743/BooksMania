@@ -15,7 +15,7 @@ const app = express();
 
 const allowedOrigins = [
   "http://localhost:5173",
-  "https://main--bookmakk.netlify.app",  // ✅ Add your Netlify/Vercel domain here
+  "https://bookmakk.netlify.app",  // ✅ Add your Netlify/Vercel domain here
 ];
 
 const corsOptions = {
