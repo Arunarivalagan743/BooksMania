@@ -5,7 +5,7 @@ import "../css/Login.css";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import AOS from "aos";
-import "aos/dist/aos.css"; // AOS styles
+import "aos/dist/aos.css"; 
 import Swal from "sweetalert2"; // SweetAlert2
 
 export default function Login({ setRoleVar }) {
