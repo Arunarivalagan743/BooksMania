@@ -1,161 +1,96 @@
-/* General Reset */
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    transition: all 0.3s ease;
-}
-
+/* Navbar Styles */
 .navbar {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 10px 20px;
-   
-    color: #a83246; /* Darker rose text */
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #333;
+  color: #fff;
+  padding: 12px 20px;
+  position: relative;
 }
 
-/* Navbar Brand */
+.navbar-left {
+  display: flex;
+  align-items: center;
+}
+
+.navbar-logo {
+  height: 40px;
+  margin-right: 10px;
+}
+
 .navbar-brand {
-    font-size: 1.8rem;
-    font-weight: bold;
-    text-decoration: none;
-    color: #d46a7e; /* Rose color */
-    cursor: pointer;
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+  color: #fff;
+  font-size: 1.5rem;
+  font-weight: bold;
 }
 
-/* Navbar Links */
+.navbar-toggle {
+  display: none;
+  background: none;
+  border: none;
+  color: #fff;
+  font-size: 1.8rem;
+  cursor: pointer;
+  z-index: 1001;
+}
+
+.navbar-menu {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
 .navbar-link {
-    font-size: 1rem;
-    font-weight: normal;
-    text-decoration: none;
-    color: #a83246; /* Darker rose */
-    padding: 5px 10px;
-    border-radius: 5px;
-    transition: background-color 0.3s ease, color 0.3s ease, transform 0.3s ease;
-    display: flex;
-    align-items: center;
-    gap: 5px;
+  text-decoration: none;
+  color: #fff;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 12px;
+  transition: color 0.3s ease;
 }
 
 .navbar-link:hover {
-    background-color: #efc6ce; /* Rose hover background */
-    color: #ffe4e6; /* Light rose text */
-    transform: scale(1.05);
+  color: #f0a500;
 }
 
-.navbar-link svg {
-    font-size: 1.2rem; /* Adjust icon size */
-}
-
-/* Navbar Mobile Toggle Button */
-.navbar-toggle {
-    display: none;
-    font-size: 1.5rem;
-    cursor: pointer;
-    color: #a83246; /* Darker rose */
-}
-
-.navbar-toggle:hover {
-    color: #d46a7e; /* Rose hover color */
-}
-
-/* Navbar Right Links */
-.navbar-right {
-    display: flex;
-    gap: 15px;
-}
-
-/* Logo Animation */
-.navbar-brand {
-    font-size: 1.8rem;
-    font-weight: bold;
-    text-decoration: none;
-    color: #d46a7e; /* Rose color */
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    transition: color 0.3s ease, transform 0.3s ease;
-}
-
-/* Hover Effect */
-.navbar-brand:hover {
-    color: #edb0ba; /* Darker rose on hover */
-    transform: scale(1.1); /* Slightly enlarge the logo */
-}
-
-/* Icon inside the logo */
-.navbar-brand svg {
-    font-size: 1.5rem; /* Adjust icon size */
-    transition: transform 0.3s ease;
-}
-
-.navbar-brand:hover svg {
-    transform: rotate(360deg); /* Icon rotates on hover */
-}
-
-.navbar-right a {
-    text-decoration: none;
-    color: #a83246; /* Darker rose */
-}
-
-.navbar-right a:hover {
-    color: #d46a7e; /* Rose hover color */
-}
-
-/* Mobile Menu */
+/* Mobile Responsive Styles */
 @media (max-width: 768px) {
-    .navbar-right {
-        display: none;
-        flex-direction: column;
-        background-color: #ffe4e6; /* Light rose background */
-        position: absolute;
-        top: 50px;
-        right: 0;
-        width: 100%;
-        padding: 10px 0;
-        gap: 10px;
-    }
+  .navbar-toggle {
+    display: block;
+    position: absolute;
+    right: 20px;
+    top: 50%;
+    transform: translateY(-50%);
+  }
 
-    .navbar-right.active {
-        display: flex;
-    }
+  .navbar-menu {
+    position: fixed;
+    top: 0;
+    right: -100%; /* Initially off-screen */
+    width: 75%;
+    height: 100vh;
+    background-color: #222;
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 80px 20px 20px;
+    transition: right 0.3s ease-in-out;
+    z-index: 1000;
+    box-shadow: -2px 0 10px rgba(0,0,0,0.2);
+  }
 
-    .navbar-toggle {
-        display: block;
-    }
+  .navbar-menu.is-active {
+    right: 0; /* Slide in when active */
+  }
 
-    /* Adjust link behavior in mobile view */
-    .navbar-link {
-        font-size: 1.2rem; /* Slightly larger font for easier reading */
-        padding: 10px;
-        width: 100%;
-        text-align: center;
-    }
-
-    /* Ensure navbar doesn't collapse on smaller screens */
-    .navbar {
-        padding: 10px 15px;
-    }
-    
-    /* Adding a background to the navbar toggle button when it's active */
-    .navbar-toggle.active {
-        color: #d46a7e; /* Rose active color */
-    }
-}
-
-/* Extra styling for active navbar state on mobile */
-@media (max-width: 768px) {
-    .navbar-right.active {
-        display: flex;
-        background-color: #ffe4e6; /* Light rose background */
-        top: 60px; /* Position the mobile menu just below the navbar */
-        width: 100%; /* Full width for the mobile menu */
-    }
-    
-    .navbar-toggle {
-        color: #a83246; /* Darker rose */
-        font-size: 1.5rem;
-    }
+  .navbar-link {
+    width: 100%;
+    padding: 12px 0;
+    border-bottom: 1px solid #444;
+    font-size: 1.1rem;
+  }
 }
