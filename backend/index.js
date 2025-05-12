@@ -15,7 +15,7 @@ const app = express();
 app.use(
   cors({
     origin: function (origin, callback) {
-      if (!origin || origin === "http://localhost:5173" || origin === "https://<your-netlify-app>.netlify.app") {
+      if (!origin || origin === "http://localhost:5173" || origin === "https://bookmakk.netlify.app") {
         callback(null, true);
       } else {
         callback(new Error("Not allowed by CORS"));
