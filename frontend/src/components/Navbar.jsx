@@ -8,24 +8,37 @@ import booksLogo from "../assets/books.png";
 
 function Navbar({ role }) {
   const [menuActive, setMenuActive] = useState(false);
-
+  
   const toggleMenu = () => {
     setMenuActive(!menuActive);
   };
+  
   const [bookCount, setBookCount] = useState(0);
-
+  
   useEffect(() => {
     const purchased = JSON.parse(localStorage.getItem("purchasedBooks")) || [];
     setBookCount(purchased.length);
     AOS.init({ duration: 1000 });
   }, []);
-  
+ 
+  // Close menu when clicking outside
   useEffect(() => {
-    AOS.init({
-      duration: 1000,
-    });
-  }, []);
+    const handleClickOutside = (event) => {
+      const navbarRight = document.querySelector('.navbar-right');
+      const navbarToggle = document.querySelector('.navbar-toggle');
+      
+      if (menuActive && navbarRight && !navbarRight.contains(event.target) && 
+          !navbarToggle.contains(event.target)) {
+        setMenuActive(false);
+      }
+    };
 
+    document.addEventListener('click', handleClickOutside);
+    return () => {
+      document.removeEventListener('click', handleClickOutside);
+    };
+  }, [menuActive]);
+  
   return (
     <nav className="navbar" data-aos="fade-down">
       <div className="navbar-left" data-aos="fade-right">
@@ -60,11 +73,10 @@ function Navbar({ role }) {
             <FaUser /> Logout
           </Link>
         )}
-        
       </div>
-      <div className="navbar-toggle" onClick={toggleMenu} data-aos="fade-up">
+      <button className="navbar-toggle" onClick={toggleMenu} data-aos="fade-up" aria-label="Toggle navigation">
         <FaBars />
-      </div>
+      </button>
     </nav>
   );
 }
