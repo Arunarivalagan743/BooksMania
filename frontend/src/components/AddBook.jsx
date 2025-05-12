@@ -28,6 +28,7 @@ export default function AddBook() {
         author,
         imageUrl,
       })
+      
       .then((res) => {
         setLoading(false);
 
