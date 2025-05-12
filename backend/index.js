@@ -12,18 +12,22 @@ import { Book
 import { Admin } from "./models/Admin.js";
 
 const app = express();
-app.use(
-  cors({
-    origin: function (origin, callback) {
-      if (!origin || origin === "http://localhost:5173" || origin === "https://bookmakk.netlify.app") {
-        callback(null, true);
-      } else {
-        callback(new Error("Not allowed by CORS"));
-      }
-    },
-    credentials: true,
-  })
-);
+
+const allowedOrigins = [
+  "http://localhost:5173",
+  "https://main--bookmakk.netlify.app",  // ✅ Add your Netlify/Vercel domain here
+];
+
+const corsOptions = {
+  origin: function (origin, callback) {
+    if (!origin || allowedOrigins.includes(origin)) {
+      callback(null, true);
+    } else {
+      callback(new Error("Not allowed by CORS"));
+    }
+  },
+  credentials: true,
+};
 
 app.use(express.json());
 app.use(cookieParser());
