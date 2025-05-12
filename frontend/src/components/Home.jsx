@@ -14,7 +14,7 @@ function Home() {
       <div className="hero-content" data-aos="fade-up">
         <h1 className="hero-text" data-aos="fade-right">Books Store</h1>
         <p className="hero-description" data-aos="fade-left">
-          Welcome to our bookstore! We offer a wide selection of books across
+          Welcome to our BookMania! We offer a wide selection of books across
           various genres. Whether you're looking for the latest bestseller or a
           classic novel, we have something for everyone. Explore our collection
           and find your next great read!
