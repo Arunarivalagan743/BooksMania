@@ -12,7 +12,9 @@ export default function Books({ role }) {
 
   useEffect(() => {
     AOS.init({ duration: 1000 });
-    axios.get("https://booksmania-7.onrender.com/book/books")
+    axios.get("https://booksmania-7.onrender.com/book/books", {
+      withCredentials: true,
+    })
       .then(res => {
         setBooks(res.data.books);
       })

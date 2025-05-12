@@ -22,12 +22,12 @@ export default function AddBook() {
     e.preventDefault();
     setLoading(true);
 
-    axios
-      .post("https://booksmania-7.onrender.com/book/add", {
-        name,
-        author,
-        imageUrl,
-      })
+   axios.post("https://booksmania-7.onrender.com/book/add", {
+  name,
+  author,
+  imageUrl,
+}, { withCredentials: true }) // <-- this line is important
+
       
       .then((res) => {
         setLoading(false);

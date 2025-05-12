@@ -27,7 +27,9 @@ export default function Login({ setRoleVar }) {
         username: username,
         password: password,
         role: role,
-      })
+      }, {
+      withCredentials: true,
+    })
       .then((res) => {
         if (res.data.login && res.data.role === "admin") {
           setRoleVar("admin");

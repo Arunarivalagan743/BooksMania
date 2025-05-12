@@ -26,7 +26,7 @@ export default function Student() {
         username,
         grade,
         password,
-      })
+      }, { withCredentials: true })
       .then((res) => {
         if (res.data.registered) {
           Swal.fire({

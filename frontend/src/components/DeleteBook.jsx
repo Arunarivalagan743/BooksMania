@@ -23,7 +23,9 @@ function DeleteBook() {
       }).then((result) => {
         if (result.isConfirmed) {
           axios
-            .delete(`https://booksmania-7.onrender.com/book/book/${id}`)
+            .delete(`https://booksmania-7.onrender.com/book/book/${id}`, {
+      withCredentials: true,
+    })
             .then((res) => {
               if (res.data.deleted) {
                 Swal.fire(

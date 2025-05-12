@@ -19,7 +19,9 @@ export default function EditBook() {
 
     axios
       .get(`
-https://booksmania-7.onrender.com/book/book/${id}`)
+https://booksmania-7.onrender.com/book/book/${id}`, {
+      withCredentials: true,
+    })
       .then((res) => {
         setName(res.data.name);
         setAuthor(res.data.author);
