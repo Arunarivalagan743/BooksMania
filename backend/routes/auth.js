@@ -20,7 +20,7 @@ router.post("/login", async (req, res) => {
       }
       const validPassword = await bcrypt.compare(password, admin.password);
       if (!validPassword) {
-        return res.json({ message: "Invalid Password" });
+        return res.json({ message: "Invalid Password for admin" });
       }
       const token = jwt.sign(
         { username: admin.username, role: "admin" },
